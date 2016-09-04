@@ -78,6 +78,66 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/09/04/string-xml/" title="string.xml" itemprop="url">string.xml</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zhangpeng" target="_blank" itemprop="author">zhangpeng</a>
+		
+  <p class="article-time">
+    <time datetime="2016-09-04T15:37:23.000Z" itemprop="datePublished"> Published 2016-09-04</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <blockquote>
+<p>假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中</p>
+</blockquote>
+<pre><code>&lt;string name=&quot;html_text&quot; formatted=&quot;false&quot;&gt;
+    &lt;![CDATA[
+    &lt;font color=\&apos;#28b5f5\&apos;&gt;Hello&lt;/font&gt; world.
+    ]]&gt;
+&lt;/string&gt;
+
+TextView tv = (TextView) findViewById(R.id.tv_txt);
+tv.setText(Html.fromHtml(getString(R.string.html_text)));
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/08/28/MarqueeTextView/" title="MarqueeTextView" itemprop="url">MarqueeTextView</a>
   </h1>
   <p class="article-author">By

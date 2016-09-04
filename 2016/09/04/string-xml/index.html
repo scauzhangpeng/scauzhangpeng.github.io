@@ -4,38 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>MarqueeTextView | Zp</title>
+    <title>string.xml | Zp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="zhangpeng">
     
 
     
-    <meta name="description" content="TextView 一直重复滚动效果，如果文字不超过宽度，是不滚动的，如果超过，一直滚动
+    <meta name="description" content="假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中
 
-&amp;lt;TextView
-    android:layout_width=&amp;quot;match_parent&amp;quot;
-    android:layout_height=&amp;quot;wrap_content&amp;quot;
-    android:text=&amp;quot;@string/auto_draw">
+&amp;lt;string name=&amp;quot;html_text&amp;quot; formatted=&amp;quot;false&amp;quot;&amp;gt;
+    &amp;lt;![CDATA[
+    &amp;lt;font color=\&amp;apos;#28b5f5\&amp;apos;&amp;gt;Hello&amp;lt;/font&amp;gt; world.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MarqueeTextView">
-<meta property="og:url" content="http://yoursite.com/2016/08/28/MarqueeTextView/index.html">
+<meta property="og:title" content="string.xml">
+<meta property="og:url" content="http://yoursite.com/2016/09/04/string-xml/index.html">
 <meta property="og:site_name" content="Zp">
-<meta property="og:description" content="TextView 一直重复滚动效果，如果文字不超过宽度，是不滚动的，如果超过，一直滚动
+<meta property="og:description" content="假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中
 
-&amp;lt;TextView
-    android:layout_width=&amp;quot;match_parent&amp;quot;
-    android:layout_height=&amp;quot;wrap_content&amp;quot;
-    android:text=&amp;quot;@string/auto_draw">
-<meta property="og:updated_time" content="2016-08-28T15:45:40.712Z">
+&amp;lt;string name=&amp;quot;html_text&amp;quot; formatted=&amp;quot;false&amp;quot;&amp;gt;
+    &amp;lt;![CDATA[
+    &amp;lt;font color=\&amp;apos;#28b5f5\&amp;apos;&amp;gt;Hello&amp;lt;/font&amp;gt; world.">
+<meta property="og:updated_time" content="2016-09-04T15:48:37.598Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MarqueeTextView">
-<meta name="twitter:description" content="TextView 一直重复滚动效果，如果文字不超过宽度，是不滚动的，如果超过，一直滚动
+<meta name="twitter:title" content="string.xml">
+<meta name="twitter:description" content="假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中
 
-&amp;lt;TextView
-    android:layout_width=&amp;quot;match_parent&amp;quot;
-    android:layout_height=&amp;quot;wrap_content&amp;quot;
-    android:text=&amp;quot;@string/auto_draw">
+&amp;lt;string name=&amp;quot;html_text&amp;quot; formatted=&amp;quot;false&amp;quot;&amp;gt;
+    &amp;lt;![CDATA[
+    &amp;lt;font color=\&amp;apos;#28b5f5\&amp;apos;&amp;gt;Hello&amp;lt;/font&amp;gt; world.">
 
     
     <link rel="alternative" href="/atom.xml" title="Zp" type="application/atom+xml">
@@ -95,14 +92,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/28/MarqueeTextView/" title="MarqueeTextView" itemprop="url">MarqueeTextView</a>
+      <a href="/2016/09/04/string-xml/" title="string.xml" itemprop="url">string.xml</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="zhangpeng" target="_blank" itemprop="author">zhangpeng</a>
 		
   <p class="article-time">
-    <time datetime="2016-08-28T15:42:57.000Z" itemprop="datePublished"> Published 2016-08-28</time>
+    <time datetime="2016-09-04T15:37:23.000Z" itemprop="datePublished"> Published 2016-09-04</time>
     
   </p>
 </header>
@@ -116,18 +113,16 @@
 		</div>
 		
 		<blockquote>
-<p>TextView 一直重复滚动效果，如果文字不超过宽度，是不滚动的，如果超过，一直滚动</p>
+<p>假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中</p>
 </blockquote>
-<pre><code>&lt;TextView
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;@string/auto_drawback&quot;
-    android:singleLine=&quot;true&quot;
-    android:ellipsize=&quot;marquee&quot;
-    android:focusable=&quot;true&quot;
-    android:marqueeRepeatLimit=&quot;marquee_forever&quot;
-    android:focusableInTouchMode=&quot;true&quot;
-    android:scrollHorizontally=&quot;true&quot;/&gt;
+<pre><code>&lt;string name=&quot;html_text&quot; formatted=&quot;false&quot;&gt;
+    &lt;![CDATA[
+    &lt;font color=\&apos;#28b5f5\&apos;&gt;Hello&lt;/font&gt; world.
+    ]]&gt;
+&lt;/string&gt;
+
+TextView tv = (TextView) findViewById(R.id.tv_txt);
+tv.setText(Html.fromHtml(getString(R.string.html_text)));
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -140,7 +135,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/08/28/MarqueeTextView/" data-title="MarqueeTextView | Zp" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/09/04/string-xml/" data-title="string.xml | Zp" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -153,19 +148,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/09/04/string-xml/" title="string.xml">
-  <strong>上一篇：</strong><br/>
-  <span>
-  string.xml</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/08/21/BounceListView/"  title="BounceListView">
+<a href="/2016/08/28/MarqueeTextView/"  title="MarqueeTextView">
  <strong>下一篇：</strong><br/> 
- <span>BounceListView
+ <span>MarqueeTextView
 </span>
 </a>
 </div>
