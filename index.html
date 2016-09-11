@@ -78,6 +78,134 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/09/11/OkHttp配置Https证书/" title="OkHttp配置Https证书" itemprop="url">OkHttp配置Https证书</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zhangpeng" target="_blank" itemprop="author">zhangpeng</a>
+		
+  <p class="article-time">
+    <time datetime="2016-09-11T07:43:14.000Z" itemprop="datePublished"> Published 2016-09-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <blockquote>
+<p>OkHttp配置Https证书，需要把证书放在assets中，然后配置如下：</p>
+</blockquote>
+<pre><code>public static OkHttpClient getOkHttpClient() {
+
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .addInterceptor(new LoggingInterceptor())//日志拦截器
+            //.addInterceptor(new AddParamInterceptor())//公共参数拦截器
+            //.addNetworkInterceptor(new StethoInterceptor())//谷歌浏览器调试
+            .connectTimeout(8, TimeUnit.SECONDS)//连接超时
+            .readTimeout(40, TimeUnit.SECONDS)//读写超时
+            .sslSocketFactory(getCertificates(getCerInputStream()))//https证书
+            .build();
+    return okHttpClient;
+}
+/**
+ * 获取证书
+ */ 
+public static InputStream getCerInputStream() {
+    InputStream inputStream = null;
+
+    try {
+        inputStream = AirRechargeApplication.getContext().getAssets().open(&quot;server.crt&quot;);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return inputStream;
+}
+
+
+/**
+ * 配置HTTPS 证书
+ *
+ * @param certificates
+ */
+public static SSLSocketFactory getCertificates(InputStream... certificates) {
+    try {
+        CertificateFactory certificateFactory = CertificateFactory.getInstance(&quot;X.509&quot;);
+        KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+        keyStore.load(null);
+        int index = 0;
+        for (InputStream certificate : certificates) {
+            String certificateAlias = Integer.toString(index++);
+            keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate));
+
+            try {
+                if (certificate != null)
+                    certificate.close();
+            } catch (IOException e) {
+            }
+        }
+
+        SSLContext sslContext = SSLContext.getInstance(&quot;TLS&quot;);
+
+        TrustManagerFactory trustManagerFactory =
+                TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+
+        trustManagerFactory.init(keyStore);
+        sslContext.init
+                (
+                        null,
+                        trustManagerFactory.getTrustManagers(),
+                        new SecureRandom()
+                );
+        return sslContext.getSocketFactory();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } catch (CertificateException e) {
+        e.printStackTrace();
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    } catch (KeyStoreException e) {
+        e.printStackTrace();
+    } catch (KeyManagementException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/09/04/string-xml/" title="string.xml" itemprop="url">string.xml</a>
   </h1>
   <p class="article-author">By

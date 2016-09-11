@@ -4,35 +4,38 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>string.xml | Zp</title>
+    <title>OkHttp配置Https证书 | Zp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="zhangpeng">
     
 
     
-    <meta name="description" content="假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中
+    <meta name="description" content="OkHttp配置Https证书，需要把证书放在assets中，然后配置如下：
 
-&amp;lt;string name=&amp;quot;html_text&amp;quot; formatted=&amp;quot;false&amp;quot;&amp;gt;
-    &amp;lt;![CDATA[
-    &amp;lt;font color=\&amp;apos;#28b5f5\&amp;apos;&amp;gt;Hello&amp;lt;/font&amp;gt; world.">
+public static OkHttpClient getOkHttpClient() {
+
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .addInterceptor(new LoggingInterceptor()">
 <meta property="og:type" content="article">
-<meta property="og:title" content="string.xml">
-<meta property="og:url" content="http://yoursite.com/2016/09/04/string-xml/index.html">
+<meta property="og:title" content="OkHttp配置Https证书">
+<meta property="og:url" content="http://yoursite.com/2016/09/11/OkHttp配置Https证书/index.html">
 <meta property="og:site_name" content="Zp">
-<meta property="og:description" content="假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中
+<meta property="og:description" content="OkHttp配置Https证书，需要把证书放在assets中，然后配置如下：
 
-&amp;lt;string name=&amp;quot;html_text&amp;quot; formatted=&amp;quot;false&amp;quot;&amp;gt;
-    &amp;lt;![CDATA[
-    &amp;lt;font color=\&amp;apos;#28b5f5\&amp;apos;&amp;gt;Hello&amp;lt;/font&amp;gt; world.">
-<meta property="og:updated_time" content="2016-09-04T15:48:37.598Z">
+public static OkHttpClient getOkHttpClient() {
+
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .addInterceptor(new LoggingInterceptor()">
+<meta property="og:updated_time" content="2016-09-11T07:49:24.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="string.xml">
-<meta name="twitter:description" content="假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中
+<meta name="twitter:title" content="OkHttp配置Https证书">
+<meta name="twitter:description" content="OkHttp配置Https证书，需要把证书放在assets中，然后配置如下：
 
-&amp;lt;string name=&amp;quot;html_text&amp;quot; formatted=&amp;quot;false&amp;quot;&amp;gt;
-    &amp;lt;![CDATA[
-    &amp;lt;font color=\&amp;apos;#28b5f5\&amp;apos;&amp;gt;Hello&amp;lt;/font&amp;gt; world.">
+public static OkHttpClient getOkHttpClient() {
+
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .addInterceptor(new LoggingInterceptor()">
 
     
     <link rel="alternative" href="/atom.xml" title="Zp" type="application/atom+xml">
@@ -92,14 +95,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/09/04/string-xml/" title="string.xml" itemprop="url">string.xml</a>
+      <a href="/2016/09/11/OkHttp配置Https证书/" title="OkHttp配置Https证书" itemprop="url">OkHttp配置Https证书</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="zhangpeng" target="_blank" itemprop="author">zhangpeng</a>
 		
   <p class="article-time">
-    <time datetime="2016-09-04T15:37:23.000Z" itemprop="datePublished"> Published 2016-09-04</time>
+    <time datetime="2016-09-11T07:43:14.000Z" itemprop="datePublished"> Published 2016-09-11</time>
     
   </p>
 </header>
@@ -113,16 +116,84 @@
 		</div>
 		
 		<blockquote>
-<p>假如遇到需求，一段文字要有不同颜色，文字还要配置在string.xml中</p>
+<p>OkHttp配置Https证书，需要把证书放在assets中，然后配置如下：</p>
 </blockquote>
-<pre><code>&lt;string name=&quot;html_text&quot; formatted=&quot;false&quot;&gt;
-    &lt;![CDATA[
-    &lt;font color=\&apos;#28b5f5\&apos;&gt;Hello&lt;/font&gt; world.
-    ]]&gt;
-&lt;/string&gt;
+<pre><code>public static OkHttpClient getOkHttpClient() {
 
-TextView tv = (TextView) findViewById(R.id.tv_txt);
-tv.setText(Html.fromHtml(getString(R.string.html_text)));
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .addInterceptor(new LoggingInterceptor())//日志拦截器
+            //.addInterceptor(new AddParamInterceptor())//公共参数拦截器
+            //.addNetworkInterceptor(new StethoInterceptor())//谷歌浏览器调试
+            .connectTimeout(8, TimeUnit.SECONDS)//连接超时
+            .readTimeout(40, TimeUnit.SECONDS)//读写超时
+            .sslSocketFactory(getCertificates(getCerInputStream()))//https证书
+            .build();
+    return okHttpClient;
+}
+/**
+ * 获取证书
+ */ 
+public static InputStream getCerInputStream() {
+    InputStream inputStream = null;
+
+    try {
+        inputStream = AirRechargeApplication.getContext().getAssets().open(&quot;server.crt&quot;);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return inputStream;
+}
+
+
+/**
+ * 配置HTTPS 证书
+ *
+ * @param certificates
+ */
+public static SSLSocketFactory getCertificates(InputStream... certificates) {
+    try {
+        CertificateFactory certificateFactory = CertificateFactory.getInstance(&quot;X.509&quot;);
+        KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+        keyStore.load(null);
+        int index = 0;
+        for (InputStream certificate : certificates) {
+            String certificateAlias = Integer.toString(index++);
+            keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate));
+
+            try {
+                if (certificate != null)
+                    certificate.close();
+            } catch (IOException e) {
+            }
+        }
+
+        SSLContext sslContext = SSLContext.getInstance(&quot;TLS&quot;);
+
+        TrustManagerFactory trustManagerFactory =
+                TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+
+        trustManagerFactory.init(keyStore);
+        sslContext.init
+                (
+                        null,
+                        trustManagerFactory.getTrustManagers(),
+                        new SecureRandom()
+                );
+        return sslContext.getSocketFactory();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } catch (CertificateException e) {
+        e.printStackTrace();
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    } catch (KeyStoreException e) {
+        e.printStackTrace();
+    } catch (KeyManagementException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -135,7 +206,7 @@ tv.setText(Html.fromHtml(getString(R.string.html_text)));
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/09/04/string-xml/" data-title="string.xml | Zp" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/09/11/OkHttp配置Https证书/" data-title="OkHttp配置Https证书 | Zp" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -148,19 +219,11 @@ tv.setText(Html.fromHtml(getString(R.string.html_text)));
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/09/11/OkHttp配置Https证书/" title="OkHttp配置Https证书">
-  <strong>上一篇：</strong><br/>
-  <span>
-  OkHttp配置Https证书</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/08/28/MarqueeTextView/"  title="MarqueeTextView">
+<a href="/2016/09/04/string-xml/"  title="string.xml">
  <strong>下一篇：</strong><br/> 
- <span>MarqueeTextView
+ <span>string.xml
 </span>
 </a>
 </div>
