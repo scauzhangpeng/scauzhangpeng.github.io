@@ -4,38 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>MarqueeTextView | Zp</title>
+    <title>使用第三方库加载gif图 | Zp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="zhangpeng">
     
 
     
-    <meta name="description" content="TextView 一直重复滚动效果，如果文字不超过宽度，是不滚动的，如果超过，一直滚动
+    <meta name="description" content="APP中难免会有较复杂的gif图需要加载，如果简单的gif可以使用帧动画进行加载，但是如果帧较多，容易出线OOM。直接使用第三方库加载显得简单粗暴，用过都说好。  
+第三方库：https://github.com/koral--/android-gif-drawable
 
-&amp;lt;TextView
-    android:layout_width=&amp;quot;match_parent&amp;quot;
-    android:layout_height=&amp;quot;wrap_content&amp;quot;
-    android:text=&amp;quot;@string/auto_draw">
+xml：
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MarqueeTextView">
-<meta property="og:url" content="http://yoursite.com/2016/08/28/MarqueeTextView/index.html">
+<meta property="og:title" content="使用第三方库加载gif图">
+<meta property="og:url" content="http://yoursite.com/2016/09/26/使用第三方库加载gif图/index.html">
 <meta property="og:site_name" content="Zp">
-<meta property="og:description" content="TextView 一直重复滚动效果，如果文字不超过宽度，是不滚动的，如果超过，一直滚动
+<meta property="og:description" content="APP中难免会有较复杂的gif图需要加载，如果简单的gif可以使用帧动画进行加载，但是如果帧较多，容易出线OOM。直接使用第三方库加载显得简单粗暴，用过都说好。  
+第三方库：https://github.com/koral--/android-gif-drawable
 
-&amp;lt;TextView
-    android:layout_width=&amp;quot;match_parent&amp;quot;
-    android:layout_height=&amp;quot;wrap_content&amp;quot;
-    android:text=&amp;quot;@string/auto_draw">
-<meta property="og:updated_time" content="2016-08-28T15:45:40.712Z">
+xml：
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quo">
+<meta property="og:updated_time" content="2016-09-25T16:14:53.904Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MarqueeTextView">
-<meta name="twitter:description" content="TextView 一直重复滚动效果，如果文字不超过宽度，是不滚动的，如果超过，一直滚动
+<meta name="twitter:title" content="使用第三方库加载gif图">
+<meta name="twitter:description" content="APP中难免会有较复杂的gif图需要加载，如果简单的gif可以使用帧动画进行加载，但是如果帧较多，容易出线OOM。直接使用第三方库加载显得简单粗暴，用过都说好。  
+第三方库：https://github.com/koral--/android-gif-drawable
 
-&amp;lt;TextView
-    android:layout_width=&amp;quot;match_parent&amp;quot;
-    android:layout_height=&amp;quot;wrap_content&amp;quot;
-    android:text=&amp;quot;@string/auto_draw">
+xml：
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quo">
 
     
     <link rel="alternative" href="/atom.xml" title="Zp" type="application/atom+xml">
@@ -95,14 +92,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/28/MarqueeTextView/" title="MarqueeTextView" itemprop="url">MarqueeTextView</a>
+      <a href="/2016/09/26/使用第三方库加载gif图/" title="使用第三方库加载gif图" itemprop="url">使用第三方库加载gif图</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="zhangpeng" target="_blank" itemprop="author">zhangpeng</a>
 		
   <p class="article-time">
-    <time datetime="2016-08-28T15:42:57.000Z" itemprop="datePublished"> Published 2016-08-28</time>
+    <time datetime="2016-09-25T16:04:31.000Z" itemprop="datePublished"> Published 2016-09-26</time>
     
   </p>
 </header>
@@ -116,18 +113,80 @@
 		</div>
 		
 		<blockquote>
-<p>TextView 一直重复滚动效果，如果文字不超过宽度，是不滚动的，如果超过，一直滚动</p>
+<p>APP中难免会有较复杂的gif图需要加载，如果简单的gif可以使用帧动画进行加载，但是如果帧较多，容易出线OOM。直接使用第三方库加载显得简单粗暴，用过都说好。  </p>
+<p>第三方库：<a href="https://github.com/koral--/android-gif-drawable" target="_blank" rel="external">https://github.com/koral--/android-gif-drawable</a></p>
 </blockquote>
-<pre><code>&lt;TextView
+<p>xml：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+android:id=&quot;@+id/activity_main&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
+android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
+android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
+tools:context=&quot;org.source.open.rat.MainActivity&quot;
+android:background=&quot;@android:color/white&quot;&gt;
+
+&lt;pl.droidsonroids.gif.GifImageView
+    android:id=&quot;@+id/gif_iv&quot;
     android:layout_width=&quot;match_parent&quot;
     android:layout_height=&quot;wrap_content&quot;
-    android:text=&quot;@string/auto_drawback&quot;
-    android:singleLine=&quot;true&quot;
-    android:ellipsize=&quot;marquee&quot;
-    android:focusable=&quot;true&quot;
-    android:marqueeRepeatLimit=&quot;marquee_forever&quot;
-    android:focusableInTouchMode=&quot;true&quot;
-    android:scrollHorizontally=&quot;true&quot;/&gt;
+    tools:src=&quot;@drawable/add_card_tip&quot;
+    android:scaleType=&quot;centerInside&quot;/&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>Java</p>
+<pre><code>import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import java.io.IOException;
+
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
+
+/**
+ * @author ZP
+ * @desc gif图 暂停、开始、播放速度等可以由代码进行控制
+ */
+public class MainActivity extends AppCompatActivity {
+
+private GifImageView mGifIv;//gif 控件
+private GifDrawable mGifDrawable;// gif 图
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    initView();
+}
+
+private void initView() {
+    mGifIv = (GifImageView) findViewById(R.id.gif_iv);
+
+    try {
+        mGifDrawable = new GifDrawable(getResources(), R.drawable.add_card_tip);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    //&gt;0加速，0-1减速
+    mGifDrawable.setSpeed(5.0f);
+
+    //gif开始
+//  mGifDrawable.start();
+    //gif暂停
+//  mGifDrawable.stop();
+
+    mGifIv.setImageDrawable(mGifDrawable);
+}
+}
+</code></pre><p>dependencies</p>
+<pre><code>dependencies {
+    compile &apos;pl.droidsonroids.gif:android-gif-drawable:1.2.2&apos;
+}
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -140,7 +199,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/08/28/MarqueeTextView/" data-title="MarqueeTextView | Zp" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/09/26/使用第三方库加载gif图/" data-title="使用第三方库加载gif图 | Zp" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -153,19 +212,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/09/04/string-xml/" title="string.xml">
-  <strong>上一篇：</strong><br/>
-  <span>
-  string.xml</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/08/21/BounceListView/"  title="BounceListView">
+<a href="/2016/09/17/Android-Studio插件/"  title="Android Studio插件">
  <strong>下一篇：</strong><br/> 
- <span>BounceListView
+ <span>Android Studio插件
 </span>
 </a>
 </div>
