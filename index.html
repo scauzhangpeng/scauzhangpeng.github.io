@@ -78,6 +78,148 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/10/07/集成Mob短信验证平台/" title="集成Mob短信验证平台" itemprop="url">集成Mob短信验证平台</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zhangpeng" target="_blank" itemprop="author">zhangpeng</a>
+		
+  <p class="article-time">
+    <time datetime="2016-10-07T04:35:56.000Z" itemprop="datePublished"> Published 2016-10-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <blockquote>
+<p>集成Mob平台短信验证码SDK，老老实实按照官方接入文档应该是没有多大问题，集成过程也会比较顺畅。本篇记录不完全按照文档接入的爬坑之旅</p>
+</blockquote>
+<p><strong> 为什么选择Mob.com的短信验证码SDK </strong><br><img src="http://o7ukzo7vj.bkt.clouddn.com/Mob%E8%B5%84%E8%B4%B9%E8%AF%B4%E6%98%8E.png" alt="Mob资费说明"></p>
+<p><strong> 短信验证模式 </strong><br><img src="http://o7ukzo7vj.bkt.clouddn.com/Mob%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E6%A8%A1%E5%BC%8F1.png" alt="Mob短信验证模式"></p>
+<p> 我们不选择Http短信，由Mob短信验证回调后再进行后续操作。这样免费短信可供学习之用。</p>
+<p><strong> 按照接入文件，总结步骤如下： </strong>  </p>
+<ol>
+<li>下载SDK，将jar和aar放入工程的libs目录下  </li>
+<li>配置下build.gradle，毕竟有aar  </li>
+<li>调用初始化方法：SMSSDK.initSDK(context, appKey, appSecret)  </li>
+<li>新建一个回调EventHandler  </li>
+<li>在OnResume()中注册这个EventHandler  ：SMSSDK.registerEventHandler(mEventHandler);//注册  </li>
+<li>在OnDestroy()中注销这个EventHandler ：SMSSDK.unregisterEventHandler(mEventHandler);//注销  </li>
+</ol>
+<p>上述步骤中所有的代码官方都有示例说明，直接copy一份就可以了  </p>
+<p><strong> 工程目录以及界面如下  </strong><br><img src="http://o7ukzo7vj.bkt.clouddn.com/%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%951.png" width="300" height="540"> <img src="http://o7ukzo7vj.bkt.clouddn.com/%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%952.png" width="300" height="540"><br><img src="http://o7ukzo7vj.bkt.clouddn.com/%E7%95%8C%E9%9D%A2.png" width="300" height="540">   <img src="http://o7ukzo7vj.bkt.clouddn.com/%E7%95%8C%E9%9D%A21.png" width="300" height="540"></p>
+<p><strong> 注意点一 </strong><br> 在library中不能使用switch-case语句去访问资源ID，原因是library中的R.java并没有把资源ID声明为final，而在主模块中，R.java将资源ID声明为final。<br> 解决方法：将switch-case语句改为if-else语句<br><strong> 注意点二 </strong><br>主模块app的build.gradle如下：  </p>
+<pre><code>apply plugin: &apos;com.android.application&apos;
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion &quot;24.0.2&quot;
+    defaultConfig {
+        applicationId &quot;org.source.open.rat&quot;
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName &quot;1.0&quot;
+        testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot;
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;
+        }
+    }
+}
+repositories{
+    flatDir{
+            dirs &apos;..\\mobsdk\\libs&apos; //就是你放aar的目录地址&lt;/font&gt;
+    }
+}
+
+dependencies {
+    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])
+    androidTestCompile(&apos;com.android.support.test.espresso:espresso-core:2.2.2&apos;, {
+    exclude group: &apos;com.android.support&apos;, module: &apos;support-annotations&apos;
+        })
+    compile &apos;com.android.support:appcompat-v7:22.2.1&apos;
+    testCompile &apos;junit:junit:4.12&apos;
+    compile project(&apos;:mobsdk&apos;)//添加依赖
+}
+</code></pre><p>mobsdk的build.gradle如下：  </p>
+<pre><code>apply plugin: &apos;com.android.library&apos;//声明为library
+
+android {
+       compileSdkVersion 22
+    buildToolsVersion &quot;24.0.2&quot;
+
+    defaultConfig {
+        //applicationId &quot;org.source.open.mobsdk&quot;//注释掉applicationId
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName &quot;1.0&quot;
+
+        testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot;
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;
+           }
+    }
+}
+
+repositories{
+    flatDir{
+        dirs &apos;libs&apos; //就是你放aar的目录地址
+    }
+}
+
+dependencies {
+    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])
+    androidTestCompile(&apos;com.android.support.test.espresso:espresso-core:2.2.2&apos;, {
+    exclude group: &apos;com.android.support&apos;, module: &apos;support-annotations&apos;
+    })
+    compile &apos;com.android.support:appcompat-v7:22.2.1&apos;
+    compile name:&apos;SMSSDK-2.1.2&apos;,ext:&apos;aar&apos;//aar依赖
+    testCompile &apos;junit:junit:4.12&apos;
+}
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/09/26/使用第三方库加载gif图/" title="使用第三方库加载gif图" itemprop="url">使用第三方库加载gif图</a>
   </h1>
   <p class="article-author">By
