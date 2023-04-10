@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.alphabet.riotgame",
+               "sha256_cert_fingerprints": ["0C:E9:98:54:0F:DD:5A:2B:DC:C1:97:B9:5F:94:C4:27:8A:1C:AB:AA:29:BD:1E:D2:E7:AC:2B:4F:63:67:90:D4"] }
+}]
